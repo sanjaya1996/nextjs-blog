@@ -1,5 +1,9 @@
 function AllPostsPage() {
-  return <h1>AllPostsPage</h1>;
+  return (
+    <>
+      <h1>All posts Page</h1>
+    </>
+  );
 }
 
 export default AllPostsPage;
