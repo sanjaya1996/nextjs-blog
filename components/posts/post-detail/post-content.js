@@ -32,10 +32,8 @@ function PostContent(props) {
       return <p>{paragraph.children}</p>;
     },
     code(code) {
-      console.log('This is code: ', code);
       const { node, inline, className, children, ...props } = code;
       const match = /language-(\w+)/.exec(className || '');
-      console.log('Match: ', match);
 
       return (
         <SyntaxHighlighter
