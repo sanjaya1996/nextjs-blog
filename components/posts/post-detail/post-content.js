@@ -1,5 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import PostHeader from './post-header';
 import classes from './post-content.module.css';
@@ -12,7 +14,6 @@ function PostContent(props) {
   const customComponents = {
     p(paragraph) {
       const { node } = paragraph;
-      console.log(node);
       if (node.children[0].tagName === 'img') {
         const { alt, src } = node.children[0].properties;
 
@@ -29,6 +30,20 @@ function PostContent(props) {
       }
 
       return <p>{paragraph.children}</p>;
+    },
+    code(code) {
+      console.log('This is code: ', code);
+      const { node, inline, className, children, ...props } = code;
+      const match = /language-(\w+)/.exec(className || '');
+      console.log('Match: ', match);
+
+      return (
+        <SyntaxHighlighter
+          style={atomDark}
+          language={match[1]}
+          children={String(children).replace(/\n$/, '')}
+        />
+      );
     },
   };
 
